@@ -1,0 +1,23 @@
+/* Page chrome only; nothing here touches markstream's own elements except the fix in .with-fix. */
+body { font-family: system-ui, sans-serif; background: #fff; color: #222; }
+main { max-width: 1280px; margin: 0 auto; padding: 24px; }
+h1 { font-size: 1.4rem; margin-bottom: 8px; }
+h2 { font-size: 1.05rem; margin-bottom: 12px; }
+.intro { max-width: 900px; line-height: 1.5; margin-bottom: 8px; }
+.fix { background: #f4f4f6; padding: 8px 12px; border-radius: 6px; overflow-x: auto; margin-bottom: 20px; font-size: 0.85rem; }
+.columns { display: grid; grid-template-columns: 1fr 1fr; gap: 280px; }
+.column { position: relative; }
+
+/* The proposed fix, applied only to the right column. Each side utility gets a style only on its own side:
+   a whole-element border-style would also draw the other sides at the browser's default medium width. */
+.with-fix :where(.markstream-vue) :where(.border) { border-style: solid; }
+.with-fix :where(.markstream-vue) :where(.border-t) { border-top-style: solid; }
+.with-fix :where(.markstream-vue) :where(.border-b) { border-bottom-style: solid; }
+.with-fix .hr-node { border-style: solid none none; }
+
+/* Big red arrows pointing left at the missing lines. */
+.arrow { position: absolute; transform: translate(4px, -50%); display: flex; align-items: center; gap: 4px; pointer-events: none; z-index: 10; white-space: nowrap; }
+.arrow-head { color: #e00; font-size: 40px; line-height: 1; }
+.arrow-label { background: #e00; color: #fff; font-weight: 600; font-size: 0.8rem; padding: 3px 8px; border-radius: 4px; }
+
+@media (max-width: 900px) { .columns { grid-template-columns: 1fr; gap: 32px; } }
